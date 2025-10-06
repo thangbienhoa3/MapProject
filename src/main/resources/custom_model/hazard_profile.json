@@ -1,0 +1,24 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "id": "flooded_zone",
+      "type": "Feature",
+      "properties": {
+        "name": "Flooded Area"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [105.800, 21.030],
+            [105.810, 21.030],
+            [105.810, 21.040],
+            [105.800, 21.040],
+            [105.800, 21.030]
+          ]
+        ]
+      }
+    }
+  ]
+}
