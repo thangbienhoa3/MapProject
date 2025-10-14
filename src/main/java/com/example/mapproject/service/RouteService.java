@@ -16,7 +16,6 @@ import org.locationtech.jts.geom.GeometryFactory;
 import org.locationtech.jts.geom.LinearRing;
 import org.locationtech.jts.geom.Polygon;
 import org.springframework.stereotype.Service;
-import java.io.File;
 
 import java.io.IOException;
 import java.util.*;
@@ -25,13 +24,14 @@ import java.util.stream.Collectors;
 @Service
 public class RouteService {
     private final GraphHopper hopper;
+    private PathService pathService;
     private final ObjectMapper mapper = new ObjectMapper();
     private CustomModel floodedModel = new CustomModel();
     private int numberOfFloodZone = 0;
     JsonFeatureCollection fc = new JsonFeatureCollection();
     public RouteService() {
         hopper = new GraphHopper();
-        hopper.setOSMFile("src/main/resources/map-data/vietnam.osm.pbf");
+        hopper.setOSMFile("src/main/resources/map-data/Phuong_VinhHung.osm.pbf");
         hopper.setGraphHopperLocation("graph-cache");
         // Dùng weighting = custom
         Profile profile = new Profile("car")
@@ -40,14 +40,19 @@ public class RouteService {
                 .setCustomModel(new CustomModel()); // mặc định
         hopper.setProfiles(profile);
 
+
         // Bật Contraction Hierarchies
         hopper.getCHPreparationHandler().setCHProfiles(new CHProfile("car"));
 
         hopper.importOrLoad();
+
+        pathService = new PathService(hopper.getBaseGraph());
+        System.out.println(pathService.getPathInfo());
     }
 
 
     public RouteResponse findShortestPath(Point from, Point to) {
+
         GHRequest req = new GHRequest(from.getLat(), from.getLng(),
                 to.getLat(), to.getLng())
                 .setProfile("car");
