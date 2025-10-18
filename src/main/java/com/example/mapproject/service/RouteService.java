@@ -29,6 +29,7 @@ public class RouteService {
     private CustomModel floodedModel = new CustomModel();
     private int numberOfFloodZone = 0;
     JsonFeatureCollection fc = new JsonFeatureCollection();
+
     public RouteService() {
         hopper = new GraphHopper();
         hopper.setOSMFile("src/main/resources/map-data/Phuong_VinhHung.osm.pbf");
@@ -46,8 +47,9 @@ public class RouteService {
 
         hopper.importOrLoad();
 
-        pathService = new PathService(hopper.getBaseGraph());
-        System.out.println(pathService.getPathInfo());
+//        pathService = new PathService(hopper.getBaseGraph());
+//        System.out.println(pathService.getPathInfo());
+//        System.out.println(hopper.getBaseGraph());
     }
 
 
@@ -56,6 +58,7 @@ public class RouteService {
         GHRequest req = new GHRequest(from.getLat(), from.getLng(),
                 to.getLat(), to.getLng())
                 .setProfile("car");
+
         req.putHint("ch.disable", true);
 
         if (floodedModel != null) {
