@@ -62,6 +62,8 @@ public class OsmGraphLoader {
             }
         }
         this.graph = mapGraph;
+        System.out.println("Graph nodes: " + mapGraph.getNumNodes());
+        System.out.println("Graph edges: " + mapGraph.getNumEdges());
     }
 
     public MapGraph getGraph() {

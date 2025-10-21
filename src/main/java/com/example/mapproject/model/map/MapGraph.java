@@ -28,6 +28,15 @@ public class MapGraph {
         return nodes.values();
     }
 
+    public int getNumNodes() {return nodes.size();}
+    public int getNumEdges() {
+        int numEdges = 0;
+        for (List<MapEdge> edges : adjacency.values()) {
+            numEdges += edges.size();
+        }
+        return numEdges / 2;
+    }
+
     public List<MapEdge> getNeighbors(int id) {
         return adjacency.getOrDefault(id, Collections.emptyList());
     }
